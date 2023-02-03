@@ -6,7 +6,19 @@ const range = document.getElementById('range');
 
 const shiftMessage = () => {
   const wordArray = [...originalInput.value.toUpperCase()];
-  alert(wordArray);
+  printChar(0, wordArray);
+}
+
+const printChar = (currentLetterIndex, wordArray) => {
+  if(wordArray.length === currentLetterIndex) return;
+  originalInput.value = originalInput.value.substring(1);
+  const spanChar = document.createElement("span");
+  outcome.appendChild(spanChar);
+  const charUncoded = wordArray[currentLetterIndex];
+  spanChar.innerHTML = alphabet.includes(charUncoded) ?
+      alphabet[(alphabet.indexOf(charUncoded) + parseInt(range.value)) % alphabet.length] :
+      charUncoded;
+  printChar(currentLetterIndex + 1, wordArray);
 }
 
 const submit = e => {
